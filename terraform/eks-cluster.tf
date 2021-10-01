@@ -3,6 +3,7 @@ module "eks" {
   cluster_name    = local.cluster_name
   cluster_version = "1.20"
   subnets         = module.vpc.private_subnets
+  permissions_boundary = "arn:aws:iam::113304117666:policy/DefaultBoundaryPolicy"
 
   tags = {
     Environment = "training"
@@ -19,17 +20,17 @@ module "eks" {
   worker_groups = [
     {
       name                          = "worker-group-1"
-      instance_type                 = "t2.micro"
+      instance_type                 = "t2.small"
       asg_desired_capacity          = 2
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
-      aws_iam_instance_profile = aws_iam_instance_profile.eks_profile.name    
+      //aws_iam_instance_profile = aws_iam_instance_profile.eks_profile.name    
     },
     {
       name                          = "worker-group-2"
-      instance_type                 = "t2.micro"
+      instance_type                 = "t2.medium"
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
       asg_desired_capacity          = 1
-      aws_iam_instance_profile = aws_iam_instance_profile.eks_profile.name
+      //aws_iam_instance_profile = aws_iam_instance_profile.eks_profile.name
     },
   ]
 }
