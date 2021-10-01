@@ -19,15 +19,17 @@ module "eks" {
   worker_groups = [
     {
       name                          = "worker-group-1"
-      instance_type                 = "t2.small"
+      instance_type                 = "t2.micro"
       asg_desired_capacity          = 2
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
+      aws_iam_instance_profile = aws_iam_instance_profile.eks_profile.name    
     },
     {
       name                          = "worker-group-2"
-      instance_type                 = "t2.medium"
+      instance_type                 = "t2.micro"
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
       asg_desired_capacity          = 1
+      aws_iam_instance_profile = aws_iam_instance_profile.eks_profile.name
     },
   ]
 }
