@@ -1,4 +1,4 @@
-resource "helm_release" "jenkins-resource" {
+resource "helm_release" "jenkins" {
   name       = "jenkins"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "jenkins"

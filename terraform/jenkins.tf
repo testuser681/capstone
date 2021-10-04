@@ -1,3 +1,3 @@
 module "jenkins_helm" {
-  source = "./jenkins"
+  source = "./modules/jenkins"
 }
